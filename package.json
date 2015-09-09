@@ -1,0 +1,25 @@
+{
+  "name": "kanban_app",
+  "version": "1.0.0",
+  "description": "Kanban app with React and Flux",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "React",
+    "Flux",
+    "Kanban"
+  ],
+  "author": "Julen Rojo",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^0.17.0",
+    "html-webpack-plugin": "^1.6.1",
+    "node-libs-browser": "^0.5.2",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.12.1",
+    "webpack-dev-server": "^1.10.1"
+  }
+}
