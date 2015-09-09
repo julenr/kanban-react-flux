@@ -19,6 +19,10 @@ create /app
        /main.js
        /component.js
        
+$ npm i -D webpack-merge 
+$ npm i -D babel-core babel-loader
 
-       
-       
+add jsx loader
+
+$ npm i -S react
+$ npm i -D react-hot-loader
