@@ -1,6 +1,7 @@
 /**
  * Created by jr1500 on 9/09/15.
  */
+
 import path from 'path';
 import HtmlwebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
