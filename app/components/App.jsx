@@ -2,53 +2,29 @@
  * Created by jr1500 on 9/09/15.
  */
 
-import uuid from 'node-uuid';
+import AltContainer from 'alt/AltContainer';
 import React from 'react';
-import Notes from './Notes.jsx';
+import Lanes from './Lanes.jsx';
+import LaneActions from '../actions/LaneActions';
+import LaneStore from '../stores/LaneStore';
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      notes: [
-        {
-          id: uuid.v4(),
-          task: 'Learn Webpack'
-        },
-        {
-          id: uuid.v4(),
-          task: 'Learn React'
-        },
-        {
-          id: uuid.v4(),
-          task: 'Do laundry'
-        },
-        {
-          id: uuid.v4(),
-          task: 'Go to the embassy'
-        }
-      ]
-    };
-    this.addNote = this.addNote.bind(this);
-  }
-
-  addNote() {
-    this.setState({
-      notes: this.state.notes.concat([{
-        id: uuid.v4(),
-        task: 'New task'
-      }])
-    });
-  }
-
   render() {
-    const notes = this.state.notes;
     return (
       <div>
-        <button className='add-note' onClick={this.addNote}>+</button>
-        <Notes items={this.state.notes}/>
+        <button className='add-lane' onClick={this.addItem}>Add New Lane</button>
+        <AltContainer
+          stores={[LaneStore]}
+          inject={ {
+            items: () => LaneStore.getState().lanes || []
+          } }
+          >
+          <Lanes />
+        </AltContainer>
       </div>
     );
+  }
+  addItem() {
+    LaneActions.create({name: 'New lane'});
   }
 }
