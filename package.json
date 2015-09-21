@@ -2,7 +2,7 @@
   "name": "kanban_app",
   "version": "1.0.0",
   "description": "Kanban app with React and Flux",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",

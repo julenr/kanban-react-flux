@@ -5,23 +5,23 @@
 import fs from 'fs';
 import React from 'react';
 import path from 'path';
-import HtmlwebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
+import HtmlwebpackPlugin from 'html-webpack-plugin';
 import merge from 'webpack-merge';
 import Clean from 'clean-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import App from './app/components/App.jsx';
 import pkg from './package.json';
+
+const TARGET = process.env.npm_lifecycle_event;
+const ROOT_PATH = path.resolve(__dirname);
 const APP_TITLE = 'Kanban app';
 
-var TARGET = process.env.npm_lifecycle_event;
-var ROOT_PATH = path.resolve(__dirname);
-
-var common = {
+const common = {
   entry: path.resolve(ROOT_PATH, 'app'),
   resolve: {
-    extentions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
   output: {
     path: path.resolve(ROOT_PATH, 'build'),
@@ -31,19 +31,12 @@ var common = {
 
 if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
-    devtool: 'eval',
-    devServer: {
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      progress: true
-    },
+    devtool: 'eval-source-map',
     module: {
       loaders: [
         {
           test: /\.css$/,
-          loaders: ['style', 'css'],
-          include: path.resolve(ROOT_PATH, 'app')
+          loaders: ['style', 'css']
         },
         {
           test: /\.jsx?$/,
@@ -51,6 +44,12 @@ if(TARGET === 'start' || !TARGET) {
           include: path.resolve(ROOT_PATH, 'app')
         }
       ]
+    },
+    devServer: {
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
@@ -67,7 +66,6 @@ if(TARGET === 'build') {
       app: path.resolve(ROOT_PATH, 'app'),
       vendor: Object.keys(pkg.dependencies)
     },
-    /* important! */
     output: {
       path: path.resolve(ROOT_PATH, 'build'),
       filename: '[name].js?[chunkhash]'
@@ -82,14 +80,14 @@ if(TARGET === 'build') {
         },
         {
           test: /\.jsx?$/,
-          loader: ['babel'],
+          loaders: ['babel'],
           include: path.resolve(ROOT_PATH, 'app')
         }
       ]
     },
     plugins: [
-      new Clean(['build']),
       new ExtractTextPlugin('styles.css?[chunkhash'),
+      new Clean(['build']),
       new webpack.optimize.CommonsChunkPlugin(
         'vendor',
         '[name].js?[chunkhash]'
@@ -116,7 +114,6 @@ if(TARGET === 'build') {
     ]
   });
 }
-
 
 function renderTemplate(template, replacements) {
   return function() {
