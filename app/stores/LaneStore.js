@@ -26,9 +26,14 @@ class LaneStore {
     });
   }
   attachToLane({laneId, noteId}) {
+    if(!noteId) {
+      this.waitFor(NoteStore);
+
+      noteId = NoteStore.getState().notes.slice(-1)[0].id;
+    }
+
     const lanes = this.lanes;
     const targetId = this.findLane(laneId);
-
     if(targetId < 0) {
       return;
     }

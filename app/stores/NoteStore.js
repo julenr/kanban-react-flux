@@ -52,7 +52,7 @@ class NoteStore {
     }
     notes.splice(indexNote, 1);
     this.setState();
-    console.warn('Successfuly deleted a note', notes, indexNote);
+    console.warn('Successfully deleted a note', notes, indexNote);
   }
 
   findNote(id){
@@ -65,6 +65,7 @@ class NoteStore {
   }
 
   get(ids) {
+    console.log('ID', ids);
     return (ids || []).map((id) => this.notes[this.findNote(id)]).filter((a) => a);
   }
 }

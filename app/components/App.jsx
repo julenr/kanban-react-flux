@@ -11,7 +11,7 @@ import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd/modules/backends/HTML5';
 
 @DragDropContext(HTML5Backend)
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <div>
@@ -31,3 +31,5 @@ export default class App extends React.Component {
     LaneActions.create({name: 'New lane'});
   }
 }
+
+export default App;

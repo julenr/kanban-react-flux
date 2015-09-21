@@ -10,7 +10,6 @@ import ItemTypes from '../constants/itemTypes';
 
 const noteTarget = {
   hover(targetProps, monitor) {
-    const targetId = targetProps.id;
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
 
@@ -40,7 +39,7 @@ class Lane extends React.Component {
 
   render() {
     const {connectDropTarget, id, name, notes, ...props} = this.props;
-
+    console.log("notes", this.props);
     return connectDropTarget(
       <div {...props}>
         <div className='lane-header'>
